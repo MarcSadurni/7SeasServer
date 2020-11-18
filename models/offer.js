@@ -16,6 +16,7 @@ const offerSchema = new Schema({
     experience: {type: String, enum: ["required", "no required"]},
     seaMiles: {type: String, enum: ["no required", "more than 100 miles", "more than 1000 miles", "more than 10000 miles"]},
     offerImage: {type: Schema.Types.ObjectId, ref: 'boat'},
+    offerCreator: {type: Schema.Types.ObjectId, ref: 'user'},
 }, 
 {
     timestamps: {
