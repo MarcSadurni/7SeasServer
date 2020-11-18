@@ -6,8 +6,19 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
     username: String,
-    password: String
-},{
+    password: String,
+    age: String,
+    gender: { type: String, enum: ["Male", "Female"] },
+    disponibility: Date,
+    email: String,
+    languages: String,
+    country: String,
+    city: String,
+    experience: { type: String, enum: ["low", "medium", "high"] },
+    lookingForSail: Boolean,
+    image: String
+}, 
+{
     timestamps: {
         createdAt: 'created_at',
         updatedAt: 'updated_at'
