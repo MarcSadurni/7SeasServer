@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const express = require("express");
 const Offer = require("../models/offer");
 const User = require("../models/user");
@@ -67,5 +68,21 @@ router.get("/crew", (req, res, next) => {
       })
   })
 
+  //RUTA EDITAR UNA OFERTA  
+
+  // PUT route => to update a specific project
+router.put('/editoffer/:id', (req, res, next) => {
+  if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      res.status(400).json({ message: 'Specified id is not valid' });
+      return;
+  }
+  Offer.findByIdAndUpdate(req.params.id, req.body)
+  .then(() => {
+      res.json({message: `Offer with ${req.params.id} is updated successfully.`})
+  })
+  .catch(err => {
+      res.json(err)
+  })
+});
 
   module.exports = router;
