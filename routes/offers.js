@@ -17,7 +17,7 @@ router.get("/boats", (req, res, next) => {
       });
   });
 
-//   RUTA PARA VISUALIZAR TODAS LAS OFERTAS DE BARCOS
+//   RUTA PARA VISUALIZAR TODAS LAS OFERTAS DE USUARIOS
 
 router.get("/crew", (req, res, next) => {
     User.find()
