@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const express = require("express");
 const Offer = require("../models/offer");
 const User = require("../models/user");
@@ -17,19 +18,16 @@ router.get("/boats", (req, res, next) => {
       });
   });
 
-//   RUTA PARA VISUALIZAR TODAS LAS OFERTAS DE BARCOS
+//   RUTA PARA VISUALIZAR TODAS LAS OFERTAS DE USUARIOS
 
-router.get("/crew", (req, res, next) => {
-    User.find()
-      .then(userOffers => {
-        
-        res.json(userOffers);
-      })
-      .catch(err => {
+router.get("/crew", async (req, res, next) => {
+    let activeUsers = await User.find({ lookingForSailAsCrew: true })
+      try {
+        res.json(activeUsers);
+      }
+      catch(err) {
         res.json(err);
-      });
-  });
-
+  }})
 
 //   PARA PODER VISUALIZAR UNA OFERTA DE BARCOS EN CONCRETO
 
@@ -67,5 +65,21 @@ router.get("/crew", (req, res, next) => {
       })
   })
 
+  //RUTA EDITAR UNA OFERTA  
+
+  // PUT route => to update a specific project
+router.put('/editoffer/:id', (req, res, next) => {
+  if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      res.status(400).json({ message: 'Specified id is not valid' });
+      return;
+  }
+  Offer.findByIdAndUpdate(req.params.id, req.body)
+  .then(() => {
+      res.json({message: `Offer with ${req.params.id} is updated successfully.`})
+  })
+  .catch(err => {
+      res.json(err)
+  })
+});
 
   module.exports = router;

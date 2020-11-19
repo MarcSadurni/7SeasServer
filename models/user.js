@@ -15,7 +15,7 @@ const userSchema = new Schema({
     country: String,
     city: String,
     experience: { type: String, enum: ["low", "medium", "high"] },
-    lookingForSailAsCrew: Boolean,
+    lookingForSailAsCrew: {type:Boolean, default : false},
     image: String
 }, 
 {

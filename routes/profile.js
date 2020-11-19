@@ -10,7 +10,7 @@ const mongoose = require("mongoose");
 router.get("/", async (req, res, next) => {
  
   // preguntar com relacionem la oferta amb l'usuari que l'ha creat
-  let myOffers = await Offer.findById(req.body._id);
+  let myOffers = await Offer.find({ offerCreator: req.body._id });
   // let myOffers = await Offer.find(req.body.offerCreator)
   // User.findById(req.body._id) = Offer.find(req.body.offerCreator);
   try {
@@ -26,23 +26,23 @@ router.put("/:id/editUser", (req, res, next) => {
   User.findByIdAndUpdate(
     { _id: req.params.id },
     {
-      username,
-      age,
-      gender,
-      disponibility,
-      email,
-      languages,
-      country,
-      city,
-      experience,
-      lookingForSailAsCrew,
-      image,
+      username: req.body.username,
+      age: req.body.age,
+      gender: req.body.gender,
+      disponibility: req.body.disponibility,
+      email: req.body.email,
+      languages: req.body.languages,
+      country: req.body.country,
+      city: req.body.city,
+      experience: req.body.experience,
+      lookingForSailAsCrew : req.body.lookingForSailAsCrew,
+      image: req.body.image,
     },
     { new: true }
   )
     .then((updateUser) => {
       res.locals.currentUserInfo = updateUser;
-      res.redirect("/profile");
+      res.json(updateUser);
     })
     .catch((error) => {
       console.log(error);
@@ -56,16 +56,16 @@ router.put("/:id/editBoat", (req, res, next) => {
   Boat.findByIdAndUpdate(
     { _id: req.params.id },
     {
-      boatName,
-      year,
-      typeBoat,
-      country,
-      currentLocation,
-      crewNumber,
-      rooms,
-      owner,
-      length,
-      image,
+      boatName: req.body.boatName,
+      year: req.body.year,
+      typeBoat: req.body.typeBoat,
+      country: req.body.country,
+      currentLocation: req.body.currentLocation,
+      crewNumber: req.body.crewNumber,
+      rooms: req.body.rooms,
+      owner: req.body.owner,
+      length: req.body.length,
+      image: req.body.image
     },
     { new: true }
   )
@@ -75,6 +75,30 @@ router.put("/:id/editBoat", (req, res, next) => {
     })
     .catch((error) => {
       console.log(error);
+    });
+});
+
+//CREAR EL MODELO DEL BARCO
+
+
+router.post("/createBoat", (req, res, next) => {
+  Offer.create({
+    boatName: req.body.boatName,
+    year: req.body.year,
+    typeBoat: req.body.typeBoat,
+    country: req.body.country,
+    currentLocation: req.body.currentLocation,
+    crewNumber: req.body.crewNumber,
+    rooms: req.body.rooms,
+    owner: req.body.owner,
+    length: req.body.length,
+    image: req.body.image
+  })
+    .then(response => {
+      res.json(response);
+    })
+    .catch(err => {
+      res.json(err);
     });
 });
 

@@ -11,7 +11,7 @@ const boatSchema = new Schema({
     crewNumber: Number,
     rooms: Number,
     owner: {type: Schema.Types.ObjectId, ref: 'User'},
-    length: Number,
+    length: String,
     image: String
 }, 
 {
