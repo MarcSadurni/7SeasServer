@@ -12,6 +12,7 @@ const cors = require("cors");
 
 const auth = require("./routes/auth");
 const profile = require("./routes/profile");
+const offers = require("./routes/offers");
 
 // MONGOOSE CONNECTION
 mongoose
@@ -66,8 +67,8 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // ROUTER MIDDLEWARE
 app.use("/auth", auth);
-app.use("/profile", profile)
-
+app.use("/profile", profile);
+app.use("/offers", offers);
 // ERROR HANDLING
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

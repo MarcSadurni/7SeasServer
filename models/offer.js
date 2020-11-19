@@ -7,7 +7,7 @@ const offerSchema = new Schema({
     boardingLocation: String,
     destiny: String,
     costs: {type: String, enum: ["unpaid", "paid", "contributing"]}, 
-    start: Date,
+    start: String,
     estimatedTime: String,
     description: String,
     nationality: String,
