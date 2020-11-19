@@ -26,23 +26,23 @@ router.put("/:id/editUser", (req, res, next) => {
   User.findByIdAndUpdate(
     { _id: req.params.id },
     {
-      username,
-      age,
-      gender,
-      disponibility,
-      email,
-      languages,
-      country,
-      city,
-      experience,
-      lookingForSailAsCrew,
-      image,
+      username: req.body.username,
+      age: req.body.age,
+      gender: req.body.gender,
+      disponibility: req.body.disponibility,
+      email: req.body.email,
+      languages: req.body.languages,
+      country: req.body.country,
+      city: req.body.city,
+      experience: req.body.experience,
+      lookingForSailAsCrew : req.body.lookingForSailAsCrew,
+      image: req.body.image,
     },
     { new: true }
   )
     .then((updateUser) => {
       res.locals.currentUserInfo = updateUser;
-      res.redirect("/profile");
+      res.json(updateUser);
     })
     .catch((error) => {
       console.log(error);

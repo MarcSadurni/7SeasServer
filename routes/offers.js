@@ -20,17 +20,14 @@ router.get("/boats", (req, res, next) => {
 
 //   RUTA PARA VISUALIZAR TODAS LAS OFERTAS DE USUARIOS
 
-router.get("/crew", (req, res, next) => {
-    User.find()
-      .then(userOffers => {
-        
-        res.json(userOffers);
-      })
-      .catch(err => {
+router.get("/crew", async (req, res, next) => {
+    let activeUsers = await User.find({ lookingForSailAsCrew: true })
+      try {
+        res.json(activeUsers);
+      }
+      catch(err) {
         res.json(err);
-      });
-  });
-
+  }})
 
 //   PARA PODER VISUALIZAR UNA OFERTA DE BARCOS EN CONCRETO
 
