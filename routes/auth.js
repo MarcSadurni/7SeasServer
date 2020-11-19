@@ -15,15 +15,12 @@ const {
 //  POST '/signup'
 
 router.post("/signup",
-  // revisamos si el user no está ya logueado usando la función helper (chequeamos si existe req.session.currentUser)
-  //... CÓDIGO (recuerda que en el archivo helpers/middleware.js tenemos las funciones de validación)
-
+ 
   isNotLoggedIn(),
     
-  // revisa que se hayan completado los valores de username y password usando la función helper
   validationLoggin(),
   async (req, res, next) => {
-    //desestructuramos el nombre de usuario y la contraseña de req.body} = req.body;
+   
     const { username, password } = req.body;
 
     try {
