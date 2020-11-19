@@ -8,16 +8,10 @@ const uploadCloud = require('../configs/cloudinary-setup');
 const cloudinaryStorage = require('multer-storage-cloudinary');
 const multer = require('multer');
 
-
-
 // RUTA PARA OBTENER LAS OFERTAS QUE HAYA CREADO EL USUARIO
 
-router.get("/", async (req, res, next) => {
- 
-  // preguntar com relacionem la oferta amb l'usuari que l'ha creat
-  let myOffers = await Offer.find({ offerCreator: req.body._id });
-  // let myOffers = await Offer.find(req.body.offerCreator)
-  // User.findById(req.body._id) = Offer.find(req.body.offerCreator);
+router.get("/:id", async (req, res, next) => {
+  let myOffers = await Offer.find({ offerCreator: req.params.id });
   try {
     res.json(myOffers);
   } catch (error) {

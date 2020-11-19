@@ -7,8 +7,6 @@ const uploadCloud = require('../configs/cloudinary-setup');
 const cloudinaryStorage = require('multer-storage-cloudinary');
 const multer = require('multer');
 
-
-
 // RUTA PARA VISUALIZAR TODAS LAS OFERTAS DE TRIPULANTES
 
 router.get("/boats", (req, res, next) => {
