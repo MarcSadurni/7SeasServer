@@ -4,6 +4,7 @@ const router = express.Router();
 const Offer = require("../models/offer");
 const Boat = require("../models/boat");
 const mongoose = require("mongoose");
+const uploadCloud = require('../configs/cloudinary');
 
 // RUTA PARA OBTENER LAS OFERTAS QUE HAYA CREADO EL USUARIO
 
@@ -22,7 +23,8 @@ router.get("/", async (req, res, next) => {
 
 // RUTA PARA PODER EDITAR LA INFORMACION DEL USUARIO
 
-router.put("/:id/editUser", (req, res, next) => {
+router.put("/:id/editUser", uploadCloud.single("photo"), (req, res, next) => {
+  
   User.findByIdAndUpdate(
     { _id: req.params.id },
     {
@@ -51,7 +53,7 @@ router.put("/:id/editUser", (req, res, next) => {
 
 // RUTA PARA PODER EDITAR LA INFORMACION DEL USUARIO
 
-router.put("/:id/editBoat", (req, res, next) => {
+router.put("/:id/editBoat", uploadCloud.single("photo"), (req, res, next) => {
   //preguntar si es fa servir el id del parametre owner o id del model boat
   Boat.findByIdAndUpdate(
     { _id: req.params.id },
@@ -81,7 +83,7 @@ router.put("/:id/editBoat", (req, res, next) => {
 //CREAR EL MODELO DEL BARCO
 
 
-router.post("/createBoat", (req, res, next) => {
+router.post("/createBoat", uploadCloud.single("photo"), (req, res, next) => {
   Offer.create({
     boatName: req.body.boatName,
     year: req.body.year,
@@ -104,7 +106,7 @@ router.post("/createBoat", (req, res, next) => {
 
 // RUTA PARA PODER CREAR UNA OFERTA
 
-router.post("/createoffer", (req, res, next) => {
+router.post("/createoffer", uploadCloud.single("photo"), (req, res, next) => {
     Offer.create({
     crewNumber : req.body.crewNumber,
     boardingLocation : req.body.boardingLocation,

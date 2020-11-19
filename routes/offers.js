@@ -3,7 +3,7 @@ const express = require("express");
 const Offer = require("../models/offer");
 const User = require("../models/user");
 const router = express.Router();
-
+const uploadCloud = require('../configs/cloudinary');
 
 // RUTA PARA VISUALIZAR TODAS LAS OFERTAS DE TRIPULANTES
 
@@ -68,7 +68,7 @@ router.get("/crew", async (req, res, next) => {
   //RUTA EDITAR UNA OFERTA  
 
   // PUT route => to update a specific project
-router.put('/editoffer/:id', (req, res, next) => {
+router.put('/editoffer/:id', uploadCloud.single("photo"), (req, res, next) => {
   if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
       res.status(400).json({ message: 'Specified id is not valid' });
       return;
