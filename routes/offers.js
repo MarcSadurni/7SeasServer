@@ -1,13 +1,14 @@
-// PARA VER TODAS LAS OFERTAS EN /OFFER
-
+const express = require("express");
 const Offer = require("../models/offer");
 const User = require("../models/user");
+const router = express.Router();
+
 
 // RUTA PARA VISUALIZAR TODAS LAS OFERTAS DE TRIPULANTES
 
-router.get("/offer/boats", (req, res, next) => {
+router.get("/boats", (req, res, next) => {
     Offer.find()
-      .populate("offer")
+      .populate("user")
       .then(boatOffers => {
         res.json(boatOffers);
       })
@@ -18,10 +19,10 @@ router.get("/offer/boats", (req, res, next) => {
 
 //   RUTA PARA VISUALIZAR TODAS LAS OFERTAS DE BARCOS
 
-router.get("/offer/crew", (req, res, next) => {
+router.get("/crew", (req, res, next) => {
     User.find()
-      .populate("user")
       .then(userOffers => {
+        
         res.json(userOffers);
       })
       .catch(err => {
@@ -32,7 +33,7 @@ router.get("/offer/crew", (req, res, next) => {
 
 //   PARA PODER VISUALIZAR UNA OFERTA DE BARCOS EN CONCRETO
 
-  router.get('/offers/boat/:id', (req, res, next)=>{
+  router.get('/boats/:id', (req, res, next)=>{
 
     if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
       res.status(400).json({ message: 'Specified id is not valid' });
@@ -50,7 +51,7 @@ router.get("/offer/crew", (req, res, next) => {
 
 //   PARA PODER VISUALIZAR UNA OFERTA DE CREW EN CONCRETO
 
-  router.get('/offers/crew/:id', (req, res, next)=>{
+  router.get('/crew/:id', (req, res, next)=>{
 
     if(!mongoose.Types.ObjectId.isValid(req.params.id)) {
       res.status(400).json({ message: 'Specified id is not valid' });
@@ -65,3 +66,6 @@ router.get("/offer/crew", (req, res, next) => {
         res.json(err);
       })
   })
+
+
+  module.exports = router;
