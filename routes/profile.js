@@ -4,7 +4,9 @@ const router = express.Router();
 const Offer = require("../models/offer");
 const Boat = require("../models/boat");
 const mongoose = require("mongoose");
-const uploadCloud = require('../configs/cloudinary');
+const uploadCloud = require('../configs/cloudinary-setup');
+const cloudinaryStorage = require('multer-storage-cloudinary');
+const multer = require('multer');
 
 // RUTA PARA OBTENER LAS OFERTAS QUE HAYA CREADO EL USUARIO
 
