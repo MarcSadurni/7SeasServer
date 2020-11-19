@@ -6,24 +6,24 @@ const User = require("../models/user");
 // RUTA PARA VISUALIZAR TODAS LAS OFERTAS DE TRIPULANTES
 
 router.get("/offer/boats", (req, res, next) => {
-    Offer.find()
-      .populate("offer")
-      .then(boatOffers => {
-        res.json(boatOffers);
-      })
-      .catch(err => {
-        res.json(err);
-      });
-  });
+  Offer.find()
+    .populate("offer")
+    .then(boatOffers => {
+      res.json(boatOffers);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
 
 //   RUTA PARA VISUALIZAR TODAS LAS OFERTAS DE BARCOS
 
 router.get("/offer/crew", (req, res, next) => {
-    User.find()
-      .populate("user")
-      .then(userOffers => {
-        res.json(userOffers);
-      })
+  User.find()
+    .populate("user")
+    .then(userOffers => {
+      res.json(userOffers);
+    })
       .catch(err => {
         res.json(err);
       });
@@ -65,3 +65,5 @@ router.get("/offer/crew", (req, res, next) => {
         res.json(err);
       })
   })
+
+  module.exports = router;  
