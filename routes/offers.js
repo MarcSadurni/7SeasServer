@@ -3,7 +3,9 @@ const express = require("express");
 const Offer = require("../models/offer");
 const User = require("../models/user");
 const router = express.Router();
-const uploadCloud = require('../configs/cloudinary');
+const uploadCloud = require('../configs/cloudinary-setup');
+const cloudinaryStorage = require('multer-storage-cloudinary');
+const multer = require('multer');
 
 // RUTA PARA VISUALIZAR TODAS LAS OFERTAS DE TRIPULANTES
 
