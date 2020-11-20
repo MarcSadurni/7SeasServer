@@ -9,7 +9,7 @@ const userSchema = new Schema({
     password: String,
     age: String,
     gender: { type: String, enum: ["Male", "Female"] },
-    disponibility: Date,
+    disponibility: String,
     email: String,
     languages: String,
     country: String,

@@ -35,9 +35,9 @@ router.get("/user/:id", async (req, res, next) => {
 // RUTA PARA PODER EDITAR LA INFORMACION DEL USUARIO
 
 router.put("/:id/editUser", uploadCloud.single("photo"), (req, res, next) => {
-  
+  console.log('REQBODY BACKEEEENDDDDD', req.body)
   User.findByIdAndUpdate(
-    { _id: req.params.id },
+     req.params.id ,
     {
       username: req.body.username,
       age: req.body.age,
@@ -55,7 +55,7 @@ router.put("/:id/editUser", uploadCloud.single("photo"), (req, res, next) => {
   )
     .then((updateUser) => {
       res.locals.currentUserInfo = updateUser;
-      res.json(updateUser);
+      res.status(200).json(updateUser);
     })
     .catch((error) => {
       console.log(error);
