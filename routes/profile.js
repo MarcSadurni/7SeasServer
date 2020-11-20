@@ -98,7 +98,7 @@ router.put("/:id/editBoat", uploadCloud.single("photo"), (req, res, next) => {
 
 
 router.post("/createBoat", uploadCloud.single("photo"), (req, res, next) => {
-  Offer.create({
+  Boat.create({
     boatName: req.body.boatName,
     year: req.body.year,
     typeBoat: req.body.typeBoat,
