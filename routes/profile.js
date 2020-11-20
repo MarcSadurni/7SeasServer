@@ -22,13 +22,12 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.get("/:id", async (req, res, next) => {
- 
+router.get("/user/:id", async (req, res, next) => {
   // preguntar com relacionem la oferta amb l'usuari que l'ha creat
-  let myUserFounded = await User.findById(req.params.id);
-  
+  let myOffers = await Offer.find({ offerCreator: req.params.id });
+   
   try {
-    res.json(myUserFounded);
+    res.status(200).json(myOffers);
   } catch (error) {
     console.log(error);
   }
