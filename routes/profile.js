@@ -11,7 +11,23 @@ const multer = require('multer');
 // RUTA PARA OBTENER LAS OFERTAS QUE HAYA CREADO EL USUARIO
 
 router.get("/:id", async (req, res, next) => {
-  let myOffers = await Offer.find({ offerCreator: req.params.id });
+ 
+  // preguntar com relacionem la oferta amb l'usuari que l'ha creat
+  let myUserFounded = await User.findById(req.params.id);
+  // User.findById(req.body._id) = Offer.find(req.body.offerCreator);
+  try {
+    res.json(myUserFounded);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.get("/", async (req, res, next) => {
+ 
+  // preguntar com relacionem la oferta amb l'usuari que l'ha creat
+  let myOffers = await Offer.find({ offerCreator: req.body._id });
+  // let myOffers = await Offer.find(req.body.offerCreator)
+  // User.findById(req.body._id) = Offer.find(req.body.offerCreator);
   try {
     res.json(myOffers);
   } catch (error) {
@@ -82,7 +98,7 @@ router.put("/:id/editBoat", uploadCloud.single("photo"), (req, res, next) => {
 
 
 router.post("/createBoat", uploadCloud.single("photo"), (req, res, next) => {
-  Offer.create({
+  Boat.create({
     boatName: req.body.boatName,
     year: req.body.year,
     typeBoat: req.body.typeBoat,
