@@ -129,30 +129,35 @@ router.post("/:id/createBoat", uploadCloud.single("photo"), async (req, res, nex
 
 // RUTA PARA PODER CREAR UNA OFERTA
 
-router.post("/createoffer", uploadCloud.single("photo"), (req, res, next) => {
-    Offer.create({
-    crewNumber : req.body.crewNumber,
-    boardingLocation : req.body.boardingLocation,
-    destiny :req.body.destiny,
-    costs:req.body.costs,
-    start:req.body.start,
-    estimatedTime:req.body.estimatedTime,
-    description:req.body.description,
-    nationality:req.body.nationality,
-    ageCrew:req.body.ageCrew,
-    journey:req.body.journey,
-    experience:req.body.experience,
-    seaMiles:req.body.seaMiles,
-    offerImage:req.body.offerImage,
-    offerCreator:req.body.offerCreator,
-    })
-      .then(response => {
-        res.json(response);
-      })
-      .catch(err => {
-        res.json(err);
-      });
-  });
+
+router.post("/:id/createoffer", uploadCloud.single("photo"), async (req, res, next) => {
+ 
+  try {
+   const newOffer = await Offer.create({
+      crewNumber : req.body.crewNumber,
+      boardingLocation : req.body.boardingLocation,
+      destiny :req.body.destiny,
+      costs:req.body.costs,
+      start:req.body.start,
+      estimatedTime:req.body.estimatedTime,
+      description:req.body.description,
+      nationality:req.body.nationality,
+      ageCrew:req.body.ageCrew,
+      journey:req.body.journey,
+      experience:req.body.experience,
+      seaMiles:req.body.seaMiles,
+      offerImage:req.body.offerImage,
+      offerCreator:req.params.id,
+   })
+   await User.findByIdAndUpdate(req.params.id, {$set:{hasBoat : true}})
+   
+    res.json(newOffer)
+  } catch (error) {
+    console.log(error)
+  }
+});
+
+
 
 // RUTA PARA BORRAR UNA OFERTA
 

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 
 const offerSchema = new Schema({
-    crewNumber: Number,
+    crewNumber: String,
     boardingLocation: String,
     destiny: String,
     costs: {type: String, enum: ["unpaid", "paid", "contributing"]}, 
