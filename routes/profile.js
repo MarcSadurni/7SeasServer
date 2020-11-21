@@ -92,25 +92,27 @@ router.put("/:id/editBoat", uploadCloud.single("photo"), (req, res, next) => {
 //CREAR EL MODELO DEL BARCO
 
 
-router.post("/:id/createBoat", uploadCloud.single("photo"), (req, res, next) => {
-  Boat.create({
-    boatName: req.body.boatName,
-    year: req.body.year,
-    typeBoat: req.body.typeBoat,
-    country: req.body.country,
-    currentLocation: req.body.currentLocation,
-    crewNumber: req.body.crewNumber,
-    rooms: req.body.rooms,
-    owner: req.body.owner,
-    length: req.body.length,
-    image: req.body.image
-  })
-    .then(response => {
-      res.json(response);
+router.post("/:id/createBoat", uploadCloud.single("photo"), async (req, res, next) => {
+ 
+   try {
+    const newBoat = await Boat.create({
+      boatName: req.body.boatName,
+      year: req.body.year,
+      typeBoat: req.body.typeBoat,
+      country: req.body.country,
+      currentLocation: req.body.currentLocation,
+      crewNumber: req.body.crewNumber,
+      rooms: req.body.rooms,
+      owner: req.params.id,
+      length: req.body.length,
+      image: req.body.image
     })
-    .catch(err => {
-      res.json(err);
-    });
+    await User.findByIdAndUpdate(req.params.id, {$set:{hasBoat : true}})
+    
+     res.json(newBoat)
+   } catch (error) {
+     console.log(error)
+   }
 });
 
 // RUTA PARA PODER CREAR UNA OFERTA
