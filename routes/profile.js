@@ -92,7 +92,7 @@ router.put("/:id/editBoat", uploadCloud.single("photo"), (req, res, next) => {
 //CREAR EL MODELO DEL BARCO
 
 
-router.post("/createBoat", uploadCloud.single("photo"), (req, res, next) => {
+router.post("/:id/createBoat", uploadCloud.single("photo"), (req, res, next) => {
   Boat.create({
     boatName: req.body.boatName,
     year: req.body.year,
