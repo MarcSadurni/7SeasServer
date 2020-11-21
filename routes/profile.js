@@ -31,6 +31,15 @@ router.get("/user/:id", async (req, res, next) => {
   }
 });
 
+router.get("/boat/:id", async (req, res, next) => {
+  let myBoat = await Boat.find({ owner: req.params.id });
+  try {
+    res.status(200).json(myBoat);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 // RUTA PARA PODER EDITAR LA INFORMACION DEL USUARIO
 
 router.put("/:id/editUser", uploadCloud.single("photo"), (req, res, next) => {
@@ -47,6 +56,7 @@ router.put("/:id/editUser", uploadCloud.single("photo"), (req, res, next) => {
       city: req.body.city,
       experience: req.body.experience,
       lookingForSailAsCrew : req.body.lookingForSailAsCrew,
+      hasBoat: req.body.hasBoat,
       image: req.body.image,
     },
     { new: true }
@@ -63,9 +73,11 @@ router.put("/:id/editUser", uploadCloud.single("photo"), (req, res, next) => {
 // RUTA PARA PODER EDITAR LA INFORMACION DEL USUARIO
 
 router.put("/:id/editBoat", uploadCloud.single("photo"), (req, res, next) => {
+  console.log(req.params.id)
   //preguntar si es fa servir el id del parametre owner o id del model boat
   Boat.findByIdAndUpdate(
     { _id: req.params.id },
+    
     {
       boatName: req.body.boatName,
       year: req.body.year,
