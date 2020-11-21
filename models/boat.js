@@ -24,3 +24,4 @@ const boatSchema = new Schema({
 const Boat = mongoose.model('Boat', boatSchema);
 
 module.exports = Boat;
+
