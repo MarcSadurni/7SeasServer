@@ -57,9 +57,10 @@ router.get("/crew", async (req, res, next) => {
       res.status(400).json({ message: 'Specified id is not valid' });
       return;
     }
-
-    Offer.findById(req.params.id).populate('user')
+    console.log(req.params, "esto son los params")
+    User.findById(req.params.id)
       .then(response => {
+        console.log(response, "esto es response")
         res.status(200).json(response);
       })
       .catch(err => {

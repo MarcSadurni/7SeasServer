@@ -18,6 +18,7 @@ const userSchema = new Schema({
     lookingForSailAsCrew: {type:Boolean, default : false},
     image: String,
     hasBoat: {type:Boolean, default : false},
+    
 }, 
 {
     timestamps: {
