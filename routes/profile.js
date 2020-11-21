@@ -34,7 +34,6 @@ router.get("/user/:id", async (req, res, next) => {
 // RUTA PARA PODER EDITAR LA INFORMACION DEL USUARIO
 
 router.put("/:id/editUser", uploadCloud.single("photo"), (req, res, next) => {
-  console.log('REQBODY BACKEEEENDDDDD', req.body)
   User.findByIdAndUpdate(
      req.params.id ,
     {

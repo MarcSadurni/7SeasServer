@@ -11,7 +11,7 @@ const offerSchema = new Schema({
     estimatedTime: String,
     description: String,
     nationality: String,
-    ageCrew: Number,
+    ageCrew: String,
     journey: {type: String, enum: ["tourism", "cruising", "regatta", "charter"]},
     experience: {type: String, enum: ["required", "no required"]},
     seaMiles: {type: String, enum: ["no required", "more than 100 miles", "more than 1000 miles", "more than 10000 miles"]},
