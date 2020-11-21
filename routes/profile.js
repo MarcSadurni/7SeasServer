@@ -14,7 +14,6 @@ router.get("/:id", async (req, res, next) => {
  
   // preguntar com relacionem la oferta amb l'usuari que l'ha creat
   let myUserFounded = await User.findById(req.params.id);
-  // User.findById(req.body._id) = Offer.find(req.body.offerCreator);
   try {
     res.json(myUserFounded);
   } catch (error) {

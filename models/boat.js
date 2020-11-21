@@ -8,8 +8,8 @@ const boatSchema = new Schema({
     typeBoat: {type: String, enum: ["power", "sail"]}, 
     country: String,
     currentLocation: String,
-    crewNumber: Number,
-    rooms: Number,
+    crewNumber: String,
+    rooms: String,
     owner: {type: Schema.Types.ObjectId, ref: 'User'},
     length: String,
     image: String
