@@ -13,6 +13,7 @@ const cors = require("cors");
 const auth = require("./routes/auth");
 const profile = require("./routes/profile");
 const offers = require("./routes/offers");
+// const upload = require("./routes/file-upload-routes");
 
 // MONGOOSE CONNECTION
 mongoose
@@ -69,11 +70,14 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/auth", auth);
 app.use("/profile", profile);
 app.use("/offers", offers);
+// app.use("/upload", upload);
+
 // ERROR HANDLING
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   res.status(404).json({ code: "not found" });
 });
+
 
 app.use((err, req, res, next) => {
   // always log the error
