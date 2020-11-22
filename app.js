@@ -13,7 +13,7 @@ const cors = require("cors");
 const auth = require("./routes/auth");
 const profile = require("./routes/profile");
 const offers = require("./routes/offers");
-// const upload = require("./routes/file-upload-routes");
+const upload = require("./routes/file-upload-routes");
 
 // MONGOOSE CONNECTION
 mongoose
@@ -70,8 +70,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/auth", auth);
 app.use("/profile", profile);
 app.use("/offers", offers);
-// app.use("/upload", upload);
-
+app.use("/upload", upload);
 // ERROR HANDLING
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
