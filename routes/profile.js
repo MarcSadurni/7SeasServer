@@ -104,7 +104,7 @@ router.put("/:id/editBoat", uploadCloud.single("photo"), (req, res, next) => {
 //CREAR EL MODELO DEL BARCO
 
 
-router.post("/:id/createBoat", uploadCloud.single("photo"), async (req, res, next) => {
+router.post("/:id/createBoat", async (req, res, next) => {
  
    try {
     const newBoat = await Boat.create({
