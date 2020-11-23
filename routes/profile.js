@@ -40,7 +40,7 @@ router.get("/boat/:id", async (req, res, next) => {
   }
 });
 
-// RUTA PARA PODER EDITAR LA INFORMACION DEL USUARIO00
+// RUTA PARA PODER EDITAR LA INFORMACION DEL USUARIO
 
 router.put("/:id/editUser", uploadCloud.single("photo"), (req, res, next) => {
   User.findByIdAndUpdate(
