@@ -94,7 +94,7 @@ router.put("/:id/editBoat", uploadCloud.single("photo"), (req, res, next) => {
   )
     .then((updateBoat) => {
       res.locals.currentUserInfo = updateBoat;
-      res.redirect("/profile");
+      res.status(200).json(updateUser);
     })
     .catch((error) => {
       console.log(error);
