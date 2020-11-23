@@ -15,7 +15,7 @@ const offerSchema = new Schema({
     journey: {type: String, enum: ["tourism", "cruising", "regatta", "charter"]},
     experience: {type: String, enum: ["required", "no required"]},
     seaMiles: {type: String, enum: ["no required", "more than 100 miles", "more than 1000 miles", "more than 10000 miles"]},
-    offerImage: {type: Schema.Types.ObjectId, ref: 'boat'},
+    offerImage: {type: Schema.Types.ObjectId, ref: 'boat', default: "https://res.cloudinary.com/dh2lo8p1f/image/upload/v1605811781/fotos/foto_barco_q0adis.jpg"},
     offerCreator: {type: Schema.Types.ObjectId, ref: 'user'},
 }, 
 {
