@@ -1,6 +1,6 @@
 const express = require("express");
-const User = require("../models/user");
 const router = express.Router();
+const User = require("../models/user");
 const Offer = require("../models/offer");
 const Boat = require("../models/boat");
 const mongoose = require("mongoose");
@@ -21,15 +21,7 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.get("/user/:id", async (req, res, next) => {
-  // preguntar com relacionem la oferta amb l'usuari que l'ha creat
-  let myOffers = await Offer.find({ offerCreator: req.params.id });
-  try {
-    res.status(200).json(myOffers);
-  } catch (error) {
-    console.log(error);
-  }
-});
+
 
 router.get("/boat/:id", async (req, res, next) => {
   let myBoat = await Boat.find({ owner: req.params.id });
@@ -174,6 +166,16 @@ router.delete('/delete/:id', (req, res, next) => {
   .catch(err => {
       res.json(err)
   })
+});
+
+router.get("/user/:id", async (req, res, next) => {
+  // preguntar com relacionem la oferta amb l'usuari que l'ha creat
+  let myOffers = await Offer.find({ offerCreator: req.params.id });
+  try {
+    res.status(200).json(myOffers);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 module.exports = router;
