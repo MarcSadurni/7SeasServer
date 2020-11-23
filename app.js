@@ -32,11 +32,11 @@ const app = express();
 app.use(
   cors({
     credentials: true,
-    origin: [process.env.PUBLIC_DOMAIN, "https://the7seasapp.firebaseapp.com"],
+    origin: [process.env.PUBLIC_DOMAIN, "https://the7seasapp.web.app", "https://the7seasapp.firebaseapp.com"],
   })
 );
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', "https://the7seasapp.firebaseapp.com", 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Origin', "https://the7seasapp.web.app", "https://the7seasapp.firebaseapp.com", 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, OPTIONS, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.setHeader('Access-Control-Allow-Credentials', true);
