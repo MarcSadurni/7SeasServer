@@ -141,6 +141,7 @@ router.post("/:id/createoffer", uploadCloud.single("photo"), async (req, res, ne
       seaMiles:req.body.seaMiles,
       offerImage:req.body.offerImage,
       offerCreator:req.params.id,
+      contactEmail:req.body.contactEmail
    })
    await User.findByIdAndUpdate(req.params.id, {$set:{hasBoat : true}})
    
