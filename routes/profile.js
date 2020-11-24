@@ -123,7 +123,7 @@ router.post("/:id/createBoat", async (req, res, next) => {
 // RUTA PARA PODER CREAR UNA OFERTA
 
 
-router.post("/:id/createoffer", uploadCloud.single("photo"), async (req, res, next) => {
+router.post("/:id/createoffer", async (req, res, next) => {
  
   try {
    const newOffer = await Offer.create({
