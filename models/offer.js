@@ -17,6 +17,7 @@ const offerSchema = new Schema({
     seaMiles: {type: String, enum: ["no required", "more than 100 miles", "more than 1000 miles", "more than 10000 miles"]},
     offerImage: {type: Schema.Types.ObjectId, ref: 'boat', default: "https://res.cloudinary.com/dh2lo8p1f/image/upload/v1605811781/fotos/foto_barco_q0adis.jpg"},
     offerCreator: {type: Schema.Types.ObjectId, ref: 'user'},
+    contactEmail:String,
 }, 
 {
     timestamps: {
