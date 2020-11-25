@@ -25,6 +25,8 @@ router.get("/:id", async (req, res, next) => {
 
 router.get("/boat/:id", async (req, res, next) => {
   let myBoat = await Boat.find({ owner: req.params.id });
+  console.log(req.params.id, "console de req.params.id")
+  console.log(myBoat, "console de myBoat")
   try {
     res.status(200).json(myBoat);
   } catch (error) {
@@ -34,7 +36,8 @@ router.get("/boat/:id", async (req, res, next) => {
 
 // RUTA PARA PODER EDITAR LA INFORMACION DEL USUARIO
 
-router.put("/:id/editUser", uploadCloud.single("photo"), (req, res, next) => {
+router.put("/:id/editUser", (req, res, next) => {
+  console.log(req.body, "console log de reqbody")
   User.findByIdAndUpdate(
      req.params.id ,
     {
@@ -64,11 +67,11 @@ router.put("/:id/editUser", uploadCloud.single("photo"), (req, res, next) => {
 
 // RUTA PARA PODER EDITAR LA INFORMACION DEL USUARIO
 
-router.put("/:id/editBoat", uploadCloud.single("photo"), (req, res, next) => {
-  console.log(req.params.id)
+router.put("/:id/editBoat", (req, res, next) => {
+  console.log(req.body, "console log de req.body")
   //preguntar si es fa servir el id del parametre owner o id del model boat
   Boat.findByIdAndUpdate(
-    { _id: req.params.id },
+    req.params.id,
     
     {
       boatName: req.body.boatName,
@@ -78,7 +81,6 @@ router.put("/:id/editBoat", uploadCloud.single("photo"), (req, res, next) => {
       currentLocation: req.body.currentLocation,
       crewNumber: req.body.crewNumber,
       rooms: req.body.rooms,
-      owner: req.body.owner,
       length: req.body.length,
       image: req.body.image
     },
@@ -86,7 +88,7 @@ router.put("/:id/editBoat", uploadCloud.single("photo"), (req, res, next) => {
   )
     .then((updateBoat) => {
       res.locals.currentUserInfo = updateBoat;
-      res.status(200).json(updateUser);
+      res.status(200).json(updateBoat);
     })
     .catch((error) => {
       console.log(error);
